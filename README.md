@@ -17,7 +17,7 @@ As a seller-user you will be able to :
      
 ## Database Diagram
 
-![database](linkToImage)
+![database](https://github.com/OscarJimenezGonzalez/Backend-GlobeMart2.0/blob/main/Globe%20Mart%20(4).png?raw=true)
 
 
 ## Database Roles 
