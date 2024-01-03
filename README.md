@@ -5,7 +5,7 @@ Web application of a modern and innovative e-commerce marketplace.
 This application might be capable of :  
   * listing a huge amount of products that are created by sellerCompanies
   * handling a large number of users within 3 types of users 
-  * creating user orders that consist of one or more transactions
+  * creating user orders that consist of one or more cartItems
   * making the payment of this order through secure online payment method platform
 
 As a seller-user you will be able to :
@@ -22,7 +22,7 @@ As a seller-user you will be able to :
 
 ## Database Roles 
 
-* Admin: this is a full access role. Admin is able to create, update and delete users, transactions, orders, products, sellerCompanies and product categories. 
+* Admin: this is a full access role. Admin is able to create, update and delete users, cartItems, orders, products, sellerCompanies and product categories. 
 * User: user role is subdivided into ...
   
   - Seller: 
@@ -94,17 +94,17 @@ As a seller-user you will be able to :
 | DELETE | /productCategory/:productCategory    | YES   | admin | Delete one productCategory  |                  | {message: 'productCategory deleted'} |
 
 
-### Transaction Endpoints
+### CartItem Endpoints
 
 | METHOD | ENDPOINT                           | TOKEN | ROLE     | DESCRIPTION                         | POST PARAMS                                     | RETURNS                          |
 |--------|------------------------------------|-------|----------|-------------------------------------|-------------------------------------------------|----------------------------------|
-| GET    | /transaction                       | YES   | admin    | Get All transactions                | `query params`                                  | [{transaction}]                  | 
-| POST   | /transaction                       | YES   | admin    | Create one transaction              | `User_id`,`Product_SellerCompany_Id`, `Oder_id` | {transaction}                    |
-| POST   | /transaction/profile               | YES   | customer | Create Own transaction              | `User_id`,`Product_SellerCompany_Id`, `Oder_id` | {transaction}                    |
-| PUT    | /transaction/:transactionId        | YES   | admin    | Update one travelLocation           | `User_id`,`Product_SellerCompany_Id`, `Oder_id` | {message: 'transaction updated'} |
-| DELETE | /transaction/:transactionId        | YES   | admin    | Delete one travelLocation           |                                                 | {message: 'transaction deleted'} |
+| GET    | /cartItem                          | YES   | admin    | Get All cartItems                   | `query params`                                  | [{cartItem}]                     | 
+| POST   | /cartItem                          | YES   | admin    | Create one cartItem                 | `User_id`,`Product_SellerCompany_Id`, `Oder_id` | {cartItem}                       |
+| POST   | /cartItem/profile                  | YES   | customer | Create Own cartItem                 | `User_id`,`Product_SellerCompany_Id`, `Oder_id` | {cartItem}                       |
+| PUT    | /cartItem/:cartItemId              | YES   | admin    | Update one cartItem                 | `User_id`,`Product_SellerCompany_Id`, `Oder_id` | {message: 'cartItem updated'}    |
+| DELETE | /cartItem/:cartItemId              | YES   | admin    | Delete one cartItem                 |                                                 | {message: 'cartItem deleted'}    |
 
-[El cliente crea una o varias transactions al aceptar una order para que se creen todas las relaciones oportunas] 
+[El cliente crea uno o varios cartItems al aceptar una order para que se creen todas las relaciones oportunas] 
 
 ### Order Endpoints
 
