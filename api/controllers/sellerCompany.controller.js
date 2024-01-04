@@ -4,7 +4,7 @@ const getAllSellerCompanies = async (req, res) => {
 
     try {
 
-        const sellerCompanies = SellerCompany.findAll({ where: req.query })
+        const sellerCompanies = await SellerCompany.findAll({ where: req.query })
 
         if (sellerCompanies) {
             return res.status(200).json(sellerCompanies)
@@ -25,7 +25,7 @@ const createSellerCompany = async (req, res) => {
 
     try {
 
-        const sellerCompany = SellerCompany.create(req.body)
+        const sellerCompany = await SellerCompany.create(req.body)
 
         if (sellerCompany) {
 
@@ -50,13 +50,14 @@ const updateSellerCompany = async (req, res) => {
 
     try {
 
-        const sellerCompany = SellerCompany.update(req.body, {
+        const [sellerCompany] = await SellerCompany.update(req.body, {
             where: {
                 id: req.params.sellerCompanyId
             }
         })
-        if (sellerCompany) {
-            return res.status(200).json(sellerCompany)
+        if (sellerCompany.length > 0) {
+
+            return res.status(200).json("SellerCompany was successfully Updated. ")
         }
         else {
             return res.status(400).send("SellerCompany couldnt be updated.")
@@ -74,7 +75,7 @@ const deleteSellerCompany = async (req, res) => {
 
     try {
 
-        const sellerCompany = SellerCompany.destroy({
+        const sellerCompany = await SellerCompany.destroy({
             where: {
                 id: req.params.sellerCompanyId
             }

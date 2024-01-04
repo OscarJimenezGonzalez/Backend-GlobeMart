@@ -4,7 +4,7 @@ const getAllProducts = async (req, res) => {    // All Roles
 
     try {
 
-        const products = Product.findAll({ where: req.query })
+        const products = await Product.findAll({ where: req.query })
 
         if (products) {
             return res.status(200).json(products)
@@ -25,7 +25,7 @@ const createProduct = async (req, res) => {
 
     try {
 
-        const product = Product.create(req.body)
+        const product = await Product.create(req.body)
 
         if (product) {
 
@@ -50,13 +50,13 @@ const updateProduct = async (req, res) => {
 
     try {
 
-        const product = Product.update(req.body, {
+        const [product] = await Product.update(req.body, {
             where: {
                 id: req.params.productId
             }
         })
         if (product) {
-            return res.status(200).json(product)
+            return res.status(200).json("Product was Successfully updated.")
         }
         else {
             return res.status(400).send("Product couldnt be updated.")
@@ -74,9 +74,9 @@ const deleteProduct = async (req, res) => {
 
     try {
 
-        const product = Product.destroy({
+        const product = await Product.destroy({
             where: {
-                id: req.params.ProductId
+                id: req.params.productId
             }
         })
         if (product) {

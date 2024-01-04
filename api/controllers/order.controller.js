@@ -4,10 +4,13 @@ const getAllOrders = async (req, res) => {
 
     try {
 
-        const orders = Order.findAll({ where: req.query })
+        const orders = await Order.findAll({ where: req.query })
 
-        if (orders) {
+        if (orders.length > 0) {
+
+            console.log(orders)
             return res.status(200).json(orders)
+
         }
         else {
             return res.status(400).send("Order Not Found")
@@ -21,16 +24,15 @@ const getAllOrders = async (req, res) => {
 
 }
 
-
 const createOrder = async (req, res) => {
 
     try {
 
-        const Order = Order.create(req.body)
+        const order = await Order.create(req.body)
 
-        if (Order) {
+        if (order) {
 
-            return res.status(200).json(Order)
+            return res.status(200).json(order)
 
         }
         else {
@@ -47,19 +49,17 @@ const createOrder = async (req, res) => {
 
 }
 
-
-
 const updateOrder = async (req, res) => {
 
     try {
 
-        const order = Order.update(req.body, {
+        const [order] = await Order.update(req.body, {
             where: {
-                id: req.params.OrderId
+                id: req.params.orderId
             }
         })
-        if (Order) {
-            return res.status(200).json(order)
+        if (order) {
+            return res.status(200).json("Order was updated successfully")
         }
         else {
             return res.status(400).send("Order couldnt be updated.")
@@ -77,7 +77,7 @@ const deleteOrder = async (req, res) => {
 
     try {
 
-        const order = Order.destroy({
+        const order = await Order.destroy({
             where: {
                 id: req.params.orderId
             }
@@ -112,8 +112,6 @@ const createOwnOrder = async (req, res) => {   // Customer
 
 
 }
-
-
 const getAllOwnOrders = async (req, res) => {   // Customer 
 
     try {
@@ -131,7 +129,6 @@ const getAllOwnOrders = async (req, res) => {   // Customer
     }
 
 }
-
 const getAllOwnSellerOrders = async (req, res) => {     // Seller 
 
     try {

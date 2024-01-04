@@ -4,7 +4,7 @@ const getAllProductCategories = async (req, res) => {
 
     try {
 
-        const productCategories = ProductCategory.findAll({ where: req.query })
+        const productCategories = await ProductCategory.findAll({ where: req.query })
 
         if (productCategories) {
             return res.status(200).json(productCategories)
@@ -25,7 +25,7 @@ const createProductCategory = async (req, res) => {
 
     try {
 
-        const productCategory = ProductCategory.create(req.body)
+        const productCategory = await ProductCategory.create(req.body)
 
         if (productCategory) {
 
@@ -50,13 +50,13 @@ const updateProductCategory = async (req, res) => {
 
     try {
 
-        const productCategory = ProductCategory.update(req.body, {
+        const [productCategory] = await ProductCategory.update(req.body, {
             where: {
                 id: req.params.productCategoryId
             }
         })
         if (productCategory) {
-            return res.status(200).json(productCategory)
+            return res.status(200).json("Product Category was updated Successfully.")
         }
         else {
             return res.status(400).send("Product Category couldnt be updated.")
@@ -74,7 +74,7 @@ const deleteProductCategory = async (req, res) => {
 
     try {
 
-        const productCategory = ProductCategory.destroy({
+        const productCategory = await ProductCategory.destroy({
             where: {
                 id: req.params.productCategoryId
             }

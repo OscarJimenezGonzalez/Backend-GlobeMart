@@ -13,8 +13,11 @@ const addRelationsToModels = () => {
         ProductCategory.hasMany(Product)
         Product.belongsTo(ProductCategory)
 
-        SellerCompany.belongsToMany(Product, { through: Product_SellerCompany })
-        Product.belongsToMany(SellerCompany, { through: Product_SellerCompany })
+        SellerCompany.hasMany(Product_SellerCompany)
+        Product_SellerCompany.belongsTo(SellerCompany)
+
+        Product.hasMany(Product_SellerCompany)
+        Product_SellerCompany.belongsTo(Product)
 
         User.hasMany(SellerCompany)
         SellerCompany.belongsTo(User)

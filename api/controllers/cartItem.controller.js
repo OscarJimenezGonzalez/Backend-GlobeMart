@@ -1,10 +1,37 @@
 const CartItem = require('../models/cartItem.model.js')
+const Product_SellerCompany = require('../models/product_sellerCompany.model.js')
+const User = require('../models/user.model.js')
+const Order = require('../models/order.model.js')
+const Product = require('../models/product.model.js')
+
 
 const getAllCartItems = async (req, res) => {
 
     try {
+        const cartItems = await CartItem.findAll({
 
-        const cartItems = CartItem.findAll({ where: req.query })
+            where: req.query,
+            include: [{
+
+                model: Product_SellerCompany,
+                attributes: ['price'],
+                include:
+                    [{
+                        model: Product,
+                        attributes: ['name', 'model', 'brand']
+                    }]
+            },
+            {
+                model: User,
+                attributes: ['username']
+            },
+            {
+                model: Order,
+                attributes: ['billNumber']
+            }]
+
+        })
+
 
         if (cartItems) {
             return res.status(200).json(cartItems)
@@ -25,7 +52,7 @@ const createCartItem = async (req, res) => {
 
     try {
 
-        const cartItem = CartItem.create(req.body)
+        const cartItem = await CartItem.create(req.body)
 
         if (cartItem) {
 
@@ -51,13 +78,13 @@ const updateCartItem = async (req, res) => {
 
     try {
 
-        const cartItem = CartItem.update(req.body, {
+        const [cartItem] = await CartItem.update(req.body, {
             where: {
                 id: req.params.cartItemId
             }
         })
         if (cartItem) {
-            return res.status(200).json(cartItem)
+            return res.status(200).json("CartItem Was successfully updated.")
         }
         else {
             return res.status(400).send("CartItem couldnt be updated.")
@@ -75,7 +102,7 @@ const deleteCartItem = async (req, res) => {
 
     try {
 
-        const cartItem = CartItem.destroy({
+        const cartItem = await CartItem.destroy({
             where: {
                 id: req.params.cartItemId
             }

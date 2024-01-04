@@ -22,10 +22,6 @@ const User = connection.define('user', {
         type: DataTypes.ENUM('admin', 'seller', 'customer'),
         defaultValue: "customer"
     }
-}, {
-    timestamps: {
-        updatedAt: false
-    }
 })
 
 module.exports = User

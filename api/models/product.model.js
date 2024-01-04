@@ -13,15 +13,8 @@ const Product = connection.define('product', {
     brand: {
         type: DataTypes.STRING
     },
-    price: {
-        type: DataTypes.DOUBLE,
-        notNull: true
-    },
     imageURL: {
         type: DataTypes.STRING
-    },
-    onSale: {
-        type: DataTypes.BOOLEAN
     }
 })
 

@@ -3,6 +3,7 @@ const { DataTypes } = require('sequelize')
 
 
 const SellerCompany = connection.define('sellerCompany', {
+
     cif: {
         type: DataTypes.STRING,
         notNull: true,

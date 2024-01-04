@@ -12,8 +12,8 @@ const { checkAdmin } = require('../middlewares/authorization.middleware')
 router
     .get('/', checkAdmin, getAllOrders)
     .post('/', checkAdmin, createOrder)
-    .put('/:cartItemId', checkAdmin, updateOrder)
-    .delete('/:cartItemId', checkAdmin, deleteOrder)
+    .put('/:orderId', checkAdmin, updateOrder)
+    .delete('/:orderId', checkAdmin, deleteOrder)
 
 
 module.exports = router

@@ -1,10 +1,25 @@
 const Product_SellerCompany = require('../models/product_sellerCompany.model')
+const SellerCompany = require('../models/sellerCompany.model')
+const Product = require('../models/product.model')
+
 
 const getAllProductSellerCompanies = async (req, res) => {
 
     try {
 
-        const productSellerCompany = Product_SellerCompany.findAll({ where: req.query })
+        const productSellerCompany = await Product_SellerCompany.findAll({
+
+            where: req.query,
+            include: [{
+                model: SellerCompany,
+                attributes: ['name'] // Atributos a seleccionar del modelo SellerCompany
+            },
+            {
+                model: Product,
+                attributes: ['name', 'model', 'brand'] // Atributos a seleccionar del modelo Product
+            }]
+
+        })
 
         if (productSellerCompany) {
             return res.status(200).json(productSellerCompany)
@@ -25,7 +40,7 @@ const createProductSellerCompany = async (req, res) => {
 
     try {
 
-        const productSellerCompany = Product_SellerCompany.create(req.body)
+        const productSellerCompany = await Product_SellerCompany.create(req.body)
 
         if (productSellerCompany) {
 
@@ -50,7 +65,7 @@ const updateProductSellerCompany = async (req, res) => {
 
     try {
 
-        const productSellerCompany = Product_SellerCompany.update(req.body, {
+        const [productSellerCompany] = await Product_SellerCompany.update(req.body, {
             where: {
                 id: req.params.productSellerCompanyId
             }
@@ -74,7 +89,7 @@ const deleteProductSellerCompany = async (req, res) => {
 
     try {
 
-        const productSellerCompany = Product_SellerCompany.destroy({
+        const productSellerCompany = await Product_SellerCompany.destroy({
             where: {
                 id: req.params.productSellerCompanyId
             }

@@ -8,6 +8,8 @@ const ProductCategory = connection.define('productCategory', {
         notNull: true,
         unique: true
     }
+}, {
+    timestamps: false
 })
 
 module.exports = ProductCategory
