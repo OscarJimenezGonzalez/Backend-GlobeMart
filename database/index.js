@@ -16,10 +16,16 @@ const checkConnection = async () => {
     }
 }
 
-const syncModels = async () => {
+const syncModels = async (value) => {
     try {
-        await connection.sync({ alter: false })
+        const state = {
+            alter: { alter: true },
+            force: { force: true }
+        }
+
+        await connection.sync(state[value])
         console.log('Models synched!')
+
     } catch (error) {
         throw error
     }

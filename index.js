@@ -3,7 +3,7 @@ require("dotenv").config()
 // const morgan = require("morgan")
 // const cors = require("cors")
 
-// const addRelationsToModels = require("./database/relations")
+const addRelationsToModels = require("./database/relations")
 
 const {
     checkConnection,
@@ -12,8 +12,10 @@ const {
 
 async function checkDB() {
     await checkConnection()
-    // await addRelationsToModels()
-    // await syncModels()
+    await addRelationsToModels()
+    await syncModels()
+    // await syncModels("force")
+    // await syncModels("alter")
 }
 
 // function startExpress() {
