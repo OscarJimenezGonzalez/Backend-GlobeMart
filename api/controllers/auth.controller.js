@@ -12,7 +12,7 @@ const signUp = async (req, res) => {
 
         const salt = bcrypt.genSaltSync(parseInt(process.env.SALTROUNDS))
         const encrypted = bcrypt.hashSync(req.body.password, salt)
-
+        
         req.body.password = encrypted
         const user = await User.create(req.body)
 
@@ -37,6 +37,7 @@ const login = async (req, res) => {
                     email: req.body.email
                 }
             })
+
         } else {
             user = await User.findOne({
                 where: {
@@ -44,12 +45,6 @@ const login = async (req, res) => {
                 }
             })
         }
-
-        // const user = await User.findOne({
-        //     where: {
-        //         [Op.or]: [{ email : req.body.email }, { dni : req.body.dni}]
-        //     }
-        // })
 
         if (!user) {
             return res.status(404).json({ message: 'Error: Wrong Email, Username or Password' })
