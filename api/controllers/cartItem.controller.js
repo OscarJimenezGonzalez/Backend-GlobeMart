@@ -1,8 +1,8 @@
 const CartItem = require('../models/cartItem.model.js')
-const Product_SellerCompany = require('../models/product_sellerCompany.model.js')
 const User = require('../models/user.model.js')
 const Order = require('../models/order.model.js')
 const Product = require('../models/product.model.js')
+const Product_SellerCompany = require('../models/product_sellerCompany.model.js')
 
 
 const getAllCartItems = async (req, res) => {
@@ -18,12 +18,12 @@ const getAllCartItems = async (req, res) => {
                 include:
                     [{
                         model: Product,
-                        attributes: ['name', 'model', 'brand']
+                        attributes: ['name', 'model', 'brand', 'imgURL']
                     }]
             },
             {
                 model: User,
-                attributes: ['username']
+                attributes: ['username', 'email']
             },
             {
                 model: Order,

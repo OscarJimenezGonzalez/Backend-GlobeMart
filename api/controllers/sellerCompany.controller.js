@@ -102,6 +102,11 @@ const getOwnSellerCompany = async (req, res) => {
 
     try {
 
+        const currentUser = res.locals.user.id
+        return res.status(200).json(currentUser)
+
+
+
     } catch (error) {
 
     }

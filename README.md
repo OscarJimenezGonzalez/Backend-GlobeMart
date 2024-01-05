@@ -17,7 +17,7 @@ As a seller-user you will be able to :
      
 ## Database Diagram
 
-![database](https://github.com/OscarJimenezGonzalez/Backend-GlobeMart2.0/blob/main/Globe%20Mart%20(5).png?raw=true)
+![database](https://github.com/OscarJimenezGonzalez/Backend-GlobeMart2.0/blob/main/Globe%20Mart%20(7).png?raw=true)
 
 
 
@@ -61,12 +61,12 @@ As a seller-user you will be able to :
 |--------|------------------------------------|-------|--------|-------------------------------------|-------------------------------------------------|-------------------------------------------|
 | GET    | /sellerCompany                     | YES   | admin  | Get All SellerCompanies             | `query params`                                  | [{SellerCompany}]                         |
 | GET    | /sellerCompany/:sellerCompanyId    | YES   | admin  | Get One SellerCompany               |                                                 | {SellerCompany}                           |
-| GET    | /sellerCompany/profile             | YES   | seller | Get Own SellerCompany               |                                                 | {SellerCompany}                           |
+| GET    | /sellerCompany/profileCompany      | YES   | seller | Get Own SellerCompany               |                                                 | {SellerCompany}                           |
 | POST   | /sellerCompany                     | YES   | admin  | Create One SellerCompany            | `CIF`,`name`, `location`, `user_id`             | {SellerCompany}                           |
 | PUT    | /sellerCompany/:sellerCompanyId    | YES   | admin  | Update One SellerCompany            | `CIF`,`name`, `location`, `user_id`             | {message: 'SellerCompany   updated'}      |
-| PUT    | /sellerCompany/profile             | YES   | seller | Update Own SellerCompany            | `CIF`,`name`, `location`                        | {message: 'Own SellerCompany   updated'}  |
+| PUT    | /sellerCompany/profileCompany      | YES   | seller | Update Own SellerCompany            | `CIF`,`name`, `location`                        | {message: 'Own SellerCompany   updated'}  |
 | DELETE | /sellerCompany/:sellerCompanyId    | YES   | admin  | Delete one SellerCompany            |                                                 | {message: 'SellerCompany deleted'}        |
-| DELETE | /sellerCompany/profile             | YES   | seller | Delete Own SellerCompany            |                                                 | {message: 'Own SellerCompany deleted'}    |
+| DELETE | /sellerCompany/profileCompany      | YES   | seller | Delete Own SellerCompany            |                                                 | {message: 'Own SellerCompany deleted'}    |
 
 
 ### Product Endpoints
@@ -79,7 +79,7 @@ As a seller-user you will be able to :
 | POST   | /product                           | YES   | admin  | Create One product          | `name`,`model`, `brand`, `price`,`imgURL`,`onSale`,`productCategory_id`  | {product}                        |
 | POST   | /product/profileCompany            | YES   | seller | Create Own Company product  | `name`,`model`, `brand`, `price`,`imgURL`,`onSale`,`productCategory_id`  | {product}                        | 
 | PUT    | /product/:productId                | YES   | admin  | Update One product          | `name`,`model`, `brand`, `price`,`imgURL`,`onSale`,`productCategory_id`  | {message: 'product updated'}     |
-| PUT    | /product/profileCompany/:productId | YES   | seller | Update Own Company product  | `name`,`model`, `brand`, `price`,`imgURL`,`onSale`,`productCategory_id`  | {message: 'own product updated'  |
+| PUT    | /product/profileCompany/:productId | YES   | seller | Update Own Company product  | `name`,`model`, `brand`, `price`,`imgURL`,`onSale`,`productCategory_id`  | {message: 'own product updated'}  |
 | DELETE | /product/:productId                | YES   | admin  | Delete one product          |                                                                          | {message: 'product deleted'}     |
 | DELETE | /product/profileCompany/:productId | YES   | seller | Delete Own Company product  |                                                                          | {message: 'own product deleted'} |
 
