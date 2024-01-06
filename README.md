@@ -14,6 +14,7 @@ As a seller-user you will be able to :
   * [retrieve the money from product sales through PayPal]
   * [obtain sales analitycs]***
 
+When logIn, a seller will be able to chose wether of his companies he wants to logIn with.  
      
 ## Database Diagram
 

@@ -19,7 +19,7 @@ const addRelationsToModels = () => {
         Product.hasMany(Product_SellerCompany)
         Product_SellerCompany.belongsTo(Product)
 
-        User.hasMany(SellerCompany)
+        User.hasOne(SellerCompany)
         SellerCompany.belongsTo(User)
 
         User.hasMany(CartItem)

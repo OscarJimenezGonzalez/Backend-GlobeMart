@@ -4,17 +4,24 @@ const {
     createProductSellerCompany,
     getAllProductSellerCompanies,
     updateProductSellerCompany,
-    deleteProductSellerCompany
+    deleteProductSellerCompany,
+    getOwnSellerCompanyProducts,
+    createVersionOfProduct,
+    updateVersionOfProduct,
+    deleteVersionOfProduct,
+
 } = require('../controllers/product_sellerCompany.controller')
 
 const { checkAdmin } = require('../middlewares/authorization.middleware')
 
-// OJO AL CHECKADMIN a la hora de recoger datos en otros controladores. 
-
 router
+    .get('/profileSeller', getOwnSellerCompanyProducts)
     .get('/', checkAdmin, getAllProductSellerCompanies)
+    .post('/profileSeller/version', createVersionOfProduct)
     .post('/', checkAdmin, createProductSellerCompany)
+    .put('/profileSeller/:productSellerCompanyId', updateVersionOfProduct)
     .put('/:productSellerCompanyId', checkAdmin, updateProductSellerCompany)
+    .delete('/profileSeller/:productSellerCompanyId', deleteVersionOfProduct)
     .delete('/:productSellerCompanyId', checkAdmin, deleteProductSellerCompany)
 
 module.exports = router

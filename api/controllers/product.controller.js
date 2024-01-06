@@ -1,4 +1,7 @@
 const Product = require('../models/product.model.js')
+const User = require('../models/user.model')
+const SellerCompany = require('../models/sellerCompany.model')
+
 
 const getAllProducts = async (req, res) => {    // All Roles
 
@@ -94,47 +97,39 @@ const deleteProduct = async (req, res) => {
 
 }
 
-
 // Specific EndPoints 
 
-const getOwnSellerCompanyProducts = async (req, res) => {
+const createOwnProduct = async (req, res) => {
 
     try {
 
+        const currentUserRole = res.locals.user.role
+        if (currentUserRole === 'seller') {
+
+            const newProduct = await Product.create(req.body)
+            if (newProduct) {
+
+                return res.status(200).json(newProduct)
+
+            } else {
+
+                return res.status(400).send('Product wasnt Created.')
+
+            }
+
+        } else {
+
+            return res.status(401).send('User not Authorized.')
+
+        }
+
     } catch (error) {
+
+        return res.status(500).json({ message: error.message })
 
     }
 
 }
-const createOwnSellerCompanyProduct = async (req, res) => {
-
-    try {
-
-    } catch (error) {
-
-    }
-
-}
-
-const updateOwnSellerCompanyProduct = async (req, res) => {
-
-    try {
-
-    } catch (error) {
-
-    }
-
-}
-const deleteOwnSellerCompanyProduct = async (req, res) => {
-
-    try {
-
-    } catch (error) {
-
-    }
-
-}
-
 
 module.exports = {
 
@@ -142,5 +137,6 @@ module.exports = {
     createProduct,
     updateProduct,
     deleteProduct,
+    createOwnProduct
 
 }
