@@ -18,18 +18,27 @@ When logIn, a seller will be able to chose wether of his companies he wants to l
      
 ## Database Diagram
 
-![database](https://github.com/OscarJimenezGonzalez/Backend-GlobeMart2.0/blob/main/Globe%20Mart%20(7).png?raw=true)
+![database](https://github.com/OscarJimenezGonzalez/Backend-GlobeMart/blob/main/Globe%20Mart%20(8).png?raw=true)
 
 
-
-## Database Roles 
+## Database Roles and Functions
 
 * Admin: this is a full access role. Admin is able to create, update and delete users, cartItems, orders, products, sellerCompanies and product categories. 
-* User: user role is subdivided into ...
-  
-  - Seller: 
-  - Customer:
+* Seller: 
+    - Auth --> SignIn/LogIn
+    - User --> Seller is able to CRUD its Own User Data
+    - SellerCompany --> Seller is able to CRUD its Own Seller Company.  
+    - Product --> Seller is able to Create a new product to the marketplace database
+    - Product --> Seller is able to Get a list of all the products of the marketplace database
+    - Product_SellerCompany --> Seller is able to Create a version of an existing product, this means adding a price a photo and more. 
+    - Orders --> Seller is able to Get a list of the orders that customers has made to their own sellers store. 
 
+* Customer: 
+    - Auth --> SignIn/LogIn
+    - User --> Customer is able to CRUD its Own User Data
+    - Orders --> Customer is able to Create an order consisting of one or more cartItems.
+    - Orders --> Customer is able to Get a list of all the orders made in the past with his username. 
+    - CartItem --> Customer is able to Create a cartItem, this way a customer links a single product to a single user (itself) and to an order. 
 
 ## Database EndPoints
 

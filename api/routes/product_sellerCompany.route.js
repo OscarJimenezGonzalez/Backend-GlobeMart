@@ -5,7 +5,7 @@ const {
     getAllProductSellerCompanies,
     updateProductSellerCompany,
     deleteProductSellerCompany,
-    getOwnSellerCompanyProducts,
+    getVersionOfProducts,
     createVersionOfProduct,
     updateVersionOfProduct,
     deleteVersionOfProduct,
@@ -15,7 +15,7 @@ const {
 const { checkAdmin } = require('../middlewares/authorization.middleware')
 
 router
-    .get('/profileSeller', getOwnSellerCompanyProducts)
+    .get('/profileSeller', getVersionOfProducts)
     .get('/', checkAdmin, getAllProductSellerCompanies)
     .post('/profileSeller/version', createVersionOfProduct)
     .post('/', checkAdmin, createProductSellerCompany)

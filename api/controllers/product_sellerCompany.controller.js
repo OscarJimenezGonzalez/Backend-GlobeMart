@@ -110,7 +110,7 @@ const deleteProductSellerCompany = async (req, res) => {
 
 // Specific EndPoints 
 
-const getOwnSellerCompanyProducts = async (req, res) => {
+const getVersionOfProducts = async (req, res) => {
 
     try {
 
@@ -298,7 +298,7 @@ const deleteVersionOfProduct = async (req, res) => {
     } catch (error) {
 
         return res.status(500).json({ message: error.message });
-        
+
     }
 
 }
@@ -309,7 +309,7 @@ module.exports = {
     createProductSellerCompany,
     updateProductSellerCompany,
     deleteProductSellerCompany,
-    getOwnSellerCompanyProducts,
+    getVersionOfProducts,
     createVersionOfProduct,
     updateVersionOfProduct,
     deleteVersionOfProduct
