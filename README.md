@@ -4,15 +4,16 @@ Web application of a modern and innovative e-commerce marketplace.
 ## Overview. 
 This application might be capable of :  
   * listing a huge amount of products that are created by sellerCompanies
-  * handling a large number of users within 3 types of users 
-  * creating user orders that consist of one or more cartItems
-  * making the payment of this order through secure online payment method platform
+  * handling a large number of users within 2 types of users Seller & Customers 
+  * creating orders formed by one o more products
+  * making the payment of this order through secure online payment method platform, turning an order into a purchase 
 
 As a seller-user you will be able to :
   * create your own seller space to upload, accomodate, advertise and sell your own company products
   * check your sales data
   * [retrieve the money from product sales through PayPal]
   * [obtain sales analitycs]***
+
 
 When logIn, a seller will be able to chose wether of his companies he wants to logIn with.  
      
@@ -36,6 +37,7 @@ When logIn, a seller will be able to chose wether of his companies he wants to l
 * Customer: 
     - Auth --> SignIn/LogIn
     - User --> Customer is able to CRUD its Own User Data
+    - Product --> Customer is able to Get a list of all the products of the marketplace database
     - Orders --> Customer is able to Create an order consisting of one or more cartItems.
     - Orders --> Customer is able to Get a list of all the orders made in the past with his username. 
     - CartItem --> Customer is able to Create a cartItem, this way a customer links a single product to a single user (itself) and to an order. 
