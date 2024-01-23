@@ -5,10 +5,13 @@ const { DataTypes } = require('sequelize')
 const Product = connection.define('product', {
     name: {
         type: DataTypes.STRING,
-        notNull: true
+        notNull: true,
+        unique: true
     },
     model: {
         type: DataTypes.STRING,
+        notNull: true,
+        unique: true
     },
     brand: {
         type: DataTypes.STRING
