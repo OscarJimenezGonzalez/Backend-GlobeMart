@@ -1,12 +1,13 @@
 const Product = require('../models/product.model.js')
-const User = require('../models/user.model')
-const SellerCompany = require('../models/sellerCompany.model')
 
-
-const getAllProducts = async (req, res) => {    // All Roles
+const getAllProducts = async (req, res) => {    // Solo pueden verlo los admins
 
     try {
 
+        const userRole = res.locals.user.role
+        if (userRole === 'customer') {
+            return res.status(401).send('User not authorized')
+        }
         const products = await Product.findAll({ where: req.query })
 
         if (products) {

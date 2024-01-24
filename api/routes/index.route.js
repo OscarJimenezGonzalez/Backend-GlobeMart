@@ -20,6 +20,6 @@ router
     .use('/order', checkAuth, orderRouter)
     .use('/cartItem', checkAuth, cartItemRouter)
     .use('/sellerCompany', checkAuth, sellerCompanyRouter)
-    .use('/productSellerCompany', checkAuth, product_sellerCompanyRouter)
+    .use('/productSellerCompany', product_sellerCompanyRouter)
 
 module.exports = router 

@@ -15,7 +15,7 @@ const getAllProductSellerCompanies = async (req, res) => {
             },
             {
                 model: Product,
-                attributes: ['name', 'model', 'brand'] // Atributos a seleccionar del modelo Product
+                attributes: ['name', 'model', 'brand', 'imageURL'] // Atributos a seleccionar del modelo Product
             }]
 
         })

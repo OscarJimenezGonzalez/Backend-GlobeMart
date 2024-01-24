@@ -12,16 +12,16 @@ const {
 
 } = require('../controllers/product_sellerCompany.controller')
 
-const { checkAdmin } = require('../middlewares/authorization.middleware')
+const { checkAdmin, checkAuth } = require('../middlewares/authorization.middleware')
 
 router
-    .get('/profileSeller', getVersionOfProducts)
-    .get('/', checkAdmin, getAllProductSellerCompanies)
-    .post('/profileSeller/version', createVersionOfProduct)
-    .post('/', checkAdmin, createProductSellerCompany)
-    .put('/profileSeller/:productSellerCompanyId', updateVersionOfProduct)
-    .put('/:productSellerCompanyId', checkAdmin, updateProductSellerCompany)
-    .delete('/profileSeller/:productSellerCompanyId', deleteVersionOfProduct)
-    .delete('/:productSellerCompanyId', checkAdmin, deleteProductSellerCompany)
+    .get('/profileSeller', checkAuth, getVersionOfProducts)  // Para que cada vendedor vea sus versiones de productos
+    .get('/', getAllProductSellerCompanies)  // *****Selected**** Ver todos los productos con sus datos de vendedor incluidos
+    .post('/profileSeller/version', checkAuth, createVersionOfProduct)
+    .post('/', checkAdmin, checkAuth, createProductSellerCompany)
+    .put('/profileSeller/:productSellerCompanyId', checkAuth, updateVersionOfProduct)
+    .put('/:productSellerCompanyId', checkAdmin, checkAuth, updateProductSellerCompany)
+    .delete('/profileSeller/:productSellerCompanyId', checkAuth, deleteVersionOfProduct)
+    .delete('/:productSellerCompanyId', checkAdmin, checkAuth, deleteProductSellerCompany)
 
 module.exports = router

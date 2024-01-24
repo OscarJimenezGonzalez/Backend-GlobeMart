@@ -11,7 +11,7 @@ const {
 const { checkAdmin } = require('../middlewares/authorization.middleware')
 
 router
-    .get('/', checkAdmin, getAllProducts)
+    .get('/', getAllProducts)  // Solo pueden verlo los admins y los sellers (para crear versiones)
     .post('/profileSeller', createOwnProduct)
     .post('/', checkAdmin, createProduct)
     .put('/:productId', checkAdmin, updateProduct)
