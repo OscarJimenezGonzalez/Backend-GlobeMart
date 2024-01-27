@@ -16,7 +16,7 @@ router
     .use('/auth', authRouter)
     .use('/user', checkAuth, userRouter)
     .use('/product', checkAuth, productRouter)
-    .use('/productCategory', checkAuth, productCategoryRouter)
+    .use('/productCategory', productCategoryRouter)
     .use('/order', checkAuth, orderRouter)
     .use('/cartItem', checkAuth, cartItemRouter)
     .use('/sellerCompany', checkAuth, sellerCompanyRouter)

@@ -10,7 +10,7 @@ const {
 const { checkAdmin } = require('../middlewares/authorization.middleware')
 
 router
-    .get('/', checkAdmin, getAllProductCategories)
+    .get('/', getAllProductCategories)
     .post('/', checkAdmin, createProductCategory)
     .put('/:productCategoryId', checkAdmin, updateProductCategory)
     .delete('/:productCategoryId', checkAdmin, deleteProductCategory)
