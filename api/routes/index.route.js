@@ -9,7 +9,7 @@ const cartItemRouter = require('./cartItem.route')
 const sellerCompanyRouter = require('./sellerCompany.route')
 const product_sellerCompanyRouter = require('./product_sellerCompany.route')
 
-const { checkAuth, checkAdmin } = require('../middlewares/authorization.middleware')
+const { checkAuth } = require('../middlewares/authorization.middleware')
 
 router
 

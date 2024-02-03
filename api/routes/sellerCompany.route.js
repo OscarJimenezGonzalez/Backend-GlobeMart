@@ -20,7 +20,7 @@ router
     .get('/profileCompany', getOwnSellerCompany)
     .get('/', checkAdmin, getAllSellerCompanies)
     .post('/profileCompany', createOwnSellerCompany)
-    .post('/', checkAdmin, createSellerCompany)
+    // .post('/', checkAdmin, createSellerCompany)
     .put('/profileCompany', updateOwnSellerCompany)
     .put('/:sellerCompanyId', checkAdmin, updateSellerCompany)
     .delete('/profileCompany', deleteOwnSellerCompany)

@@ -47,7 +47,7 @@ const login = async (req, res) => {
         }
 
         if (!user) {
-            return res.status(404).json({ message: 'Error: Wrong Email, Username or Password' })
+            return res.status(401).json({ message: 'Error: Wrong Email, Username or Password' })
         }
 
         const comparePassword = bcrypt.compareSync(req.body.password, user.password)
@@ -61,7 +61,7 @@ const login = async (req, res) => {
         }
         else {
             return res
-                .status(404)
+                .status(401)
                 .json({ message: "Error: Wrong Email, Username or Password" });
         }
 
