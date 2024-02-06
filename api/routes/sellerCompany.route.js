@@ -5,7 +5,6 @@ const {
     getAllSellerCompanies,
     updateSellerCompany,
     deleteSellerCompany,
-
     //Specific EndPoints
     getOwnSellerCompany,
     createOwnSellerCompany,
