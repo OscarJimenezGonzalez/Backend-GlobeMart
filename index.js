@@ -18,7 +18,6 @@ async function checkDB() {
     // await syncModels("alter")
 }
 
-
 function startExpress() {
     const app = express()
         .use(cors())

@@ -3,9 +3,10 @@ const router = require('express').Router()
 const {
     createProductSellerCompany,
     getAllProductSellerCompanies,
+    getOneVersionOfProduct,
     updateProductSellerCompany,
     deleteProductSellerCompany,
-    getVersionOfProducts,
+    getOwnVersionOfProducts,
     createVersionOfProduct,
     updateVersionOfProduct,
     deleteVersionOfProduct,
@@ -15,7 +16,8 @@ const {
 const { checkAdmin, checkAuth } = require('../middlewares/authorization.middleware')
 
 router
-    .get('/profileSeller', checkAuth, getVersionOfProducts)  // Para que cada vendedor vea sus versiones de productos
+    .get('/profileSeller', checkAuth, getOwnVersionOfProducts)  // Para que cada vendedor vea sus versiones de productos
+    .get('/:productSellerCompanyId', getOneVersionOfProduct) // All
     .get('/', getAllProductSellerCompanies)  // *****Selected**** Ver todos los productos con sus datos de vendedor incluidos
     .post('/profileSeller/version', checkAuth, createVersionOfProduct)
     .post('/', checkAdmin, checkAuth, createProductSellerCompany)

@@ -35,6 +35,39 @@ const getAllProductSellerCompanies = async (req, res) => {
 
 }
 
+const getOneVersionOfProduct = async (req, res) => {
+
+    try {
+
+        const productSellerCompany = await Product_SellerCompany.findByPk(req.params.productSellerCompanyId, {
+
+            include: [{
+                model: SellerCompany,
+                attributes: ['name'] // Atributos a seleccionar del modelo SellerCompany
+            },
+            {
+                model: Product,
+                attributes: ['name', 'model', 'brand', 'imageURL', 'productCategoryId'] // Atributos a seleccionar del modelo Product
+            }]
+
+
+        })
+
+        if (productSellerCompany) {
+            return res.status(200).json(productSellerCompany)
+        }
+        else {
+            return res.status(404).send("ProductSellerCompany was not found.")
+        }
+
+    } catch (error) {
+
+        return res.status(500).send({ message: error.message })
+
+    }
+
+}
+
 const createProductSellerCompany = async (req, res) => {
 
     try {
@@ -110,7 +143,7 @@ const deleteProductSellerCompany = async (req, res) => {
 
 // Specific EndPoints 
 
-const getVersionOfProducts = async (req, res) => {
+const getOwnVersionOfProducts = async (req, res) => {
 
     try {
 
@@ -306,10 +339,11 @@ const deleteVersionOfProduct = async (req, res) => {
 module.exports = {
 
     getAllProductSellerCompanies,
+    getOneVersionOfProduct,
     createProductSellerCompany,
     updateProductSellerCompany,
     deleteProductSellerCompany,
-    getVersionOfProducts,
+    getOwnVersionOfProducts,
     createVersionOfProduct,
     updateVersionOfProduct,
     deleteVersionOfProduct
