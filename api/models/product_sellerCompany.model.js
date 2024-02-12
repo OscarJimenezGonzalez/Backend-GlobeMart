@@ -28,6 +28,9 @@ const Product_SellerCompany = connection.define('product_SellerCompany', {
     qtyAvailable: {
         type: DataTypes.INTEGER
     },
+    productDescription: {
+        type: DataTypes.TEXT
+    },
     hasShoeSizes: {
         type: DataTypes.BOOLEAN
     },
@@ -35,6 +38,9 @@ const Product_SellerCompany = connection.define('product_SellerCompany', {
         type: DataTypes.BOOLEAN
     },
     hasColorOption: {
+        type: DataTypes.BOOLEAN
+    },
+    isFineanceable: {
         type: DataTypes.BOOLEAN
     }
 
