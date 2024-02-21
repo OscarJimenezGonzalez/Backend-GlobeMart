@@ -5,6 +5,7 @@ const Product = require('../api/models/product.model.js')
 const ProductCategory = require('../api/models/productCategory.model.js')
 const SellerCompany = require('../api/models/sellerCompany.model.js')
 const Product_SellerCompany = require('../api/models/product_sellerCompany.model.js')
+const CommercialAd = require('../api/models/commercialAd.model.js')
 
 
 const addRelationsToModels = () => {

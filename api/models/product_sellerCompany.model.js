@@ -42,10 +42,29 @@ const Product_SellerCompany = connection.define('product_SellerCompany', {
     },
     isFineanceable: {
         type: DataTypes.BOOLEAN
+    },
+    priceAfterSale: {
+        type: DataTypes.DOUBLE
     }
 
 }, {
     timestamps: false
 })
+
+
+// Codigo que me sirve para operar el porcentaje antes de guardar el registro del precio de venta
+
+Product_SellerCompany.beforeSave((product, options) => {
+    console.log('Before save hook triggered for product:', product.id);
+    if (product.onSale && product.salePercentage > 0) {
+        const discount = product.price * (product.salePercentage / 100);
+        product.priceAfterSale = product.price - discount;
+        console.log(`Calculated priceAfterSale: ${product.priceAfterSale} for product: ${product.id}`);
+    } else {
+        product.priceAfterSale = product.price;
+        console.log(`Product is not on sale. Set priceAfterSale = price for product: ${product.id}`);
+    }
+});
+
 
 module.exports = Product_SellerCompany

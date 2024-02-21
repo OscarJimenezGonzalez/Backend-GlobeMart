@@ -22,6 +22,10 @@ const Order = connection.define('order', {
     totalPrice: {
         type: DataTypes.DOUBLE,
         notNull: true
+    },
+    isPayed: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 })
 
