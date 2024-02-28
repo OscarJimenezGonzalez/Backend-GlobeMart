@@ -29,11 +29,13 @@ const checkAuth = async (req, res, next) => {
 }
 
 const checkAdmin = (req, res, next) => {
+
     if (res.locals.user.role !== 'admin') {
         return res.status(401).send('User not authorized')
     }
     next()
 }
+
 
 module.exports = {
     checkAuth,

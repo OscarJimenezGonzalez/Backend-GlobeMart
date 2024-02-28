@@ -15,7 +15,7 @@ async function checkDB() {
     await addRelationsToModels()
     await syncModels()
     // await syncModels("force")
-    await syncModels("alter")
+    // await syncModels("alter")
 }
 
 function startExpress() {

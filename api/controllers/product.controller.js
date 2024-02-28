@@ -100,37 +100,37 @@ const deleteProduct = async (req, res) => {
 
 // Specific EndPoints 
 
-const createOwnProduct = async (req, res) => {
+// const createOwnProduct = async (req, res) => {
 
-    try {
+//     try {
 
-        const currentUserRole = res.locals.user.role
-        if (currentUserRole === 'seller') {
+//         const currentUserRole = res.locals.user.role
+//         if (currentUserRole === 'seller') {
 
-            const newProduct = await Product.create(req.body)
-            if (newProduct) {
+//             const newProduct = await Product.create(req.body)
+//             if (newProduct) {
 
-                return res.status(200).json(newProduct)
+//                 return res.status(200).json(newProduct)
 
-            } else {
+//             } else {
 
-                return res.status(400).send('Product wasnt Created.')
+//                 return res.status(400).send('Product wasnt Created.')
 
-            }
+//             }
 
-        } else {
+//         } else {
 
-            return res.status(401).send('User not Authorized.')
+//             return res.status(401).send('User not Authorized.')
 
-        }
+//         }
 
-    } catch (error) {
+//     } catch (error) {
 
-        return res.status(500).json({ message: error.message })
+//         return res.status(500).json({ message: error.message })
 
-    }
+//     }
 
-}
+// }
 
 module.exports = {
 
@@ -138,6 +138,5 @@ module.exports = {
     createProduct,
     updateProduct,
     deleteProduct,
-    createOwnProduct
 
 }

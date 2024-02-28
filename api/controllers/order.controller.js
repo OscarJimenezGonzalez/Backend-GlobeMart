@@ -104,15 +104,31 @@ const createOwnOrder = async (req, res) => {   // Customer
 
     try {
 
+        const currentUserId = res.locals.user.id
+        const order = await Order.create({
+            ...req.body,
+            userId: currentUserId
+        })
+
+        if (order) {
+
+            return res.status(200).json(order)
+
+        }
+        else {
+
+            return res.status(400).send("Order couldnt be created.")
+
+        }
 
     } catch (error) {
 
+        res.status(500).json({ message: error.message })
 
     }
 
-
 }
-const getAllOwnOrders = async (req, res) => {   // Customer 
+const getOwnOrders = async (req, res) => {   // Customer 
 
     try {
 
@@ -148,5 +164,6 @@ module.exports = {
     createOrder,
     updateOrder,
     deleteOrder,
+    createOwnOrder
 
 }

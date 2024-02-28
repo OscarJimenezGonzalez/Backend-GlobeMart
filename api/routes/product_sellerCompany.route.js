@@ -5,6 +5,7 @@ const {
     getAllProductSellerCompanies,
     getOneVersionOfProduct,
     updateProductSellerCompany,
+    updateQuantityOfProduct,
     deleteProductSellerCompany,
     getOwnVersionOfProducts,
     createVersionOfProduct,
@@ -22,6 +23,7 @@ router
     .post('/profileSeller/version', checkAuth, createVersionOfProduct)
     .post('/', checkAdmin, checkAuth, createProductSellerCompany)
     .put('/profileSeller/:productSellerCompanyId', checkAuth, updateVersionOfProduct)
+    .put('/cart/:productSellerCompanyId', checkAuth, updateQuantityOfProduct)
     .put('/:productSellerCompanyId', checkAdmin, checkAuth, updateProductSellerCompany)
     .delete('/profileSeller/:productSellerCompanyId', checkAuth, deleteVersionOfProduct)
     .delete('/:productSellerCompanyId', checkAdmin, checkAuth, deleteProductSellerCompany)

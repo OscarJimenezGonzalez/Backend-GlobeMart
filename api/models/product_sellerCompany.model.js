@@ -1,5 +1,6 @@
 const { connection } = require('../../database/index')
-const { DataTypes } = require('sequelize')
+const { DataTypes } = require('sequelize');
+const ProductCategory = require('./productCategory.model');
 
 const Product_SellerCompany = connection.define('product_SellerCompany', {
 
@@ -12,12 +13,6 @@ const Product_SellerCompany = connection.define('product_SellerCompany', {
     price: {
         type: DataTypes.DOUBLE,
         notNull: true,
-        get() {
-            // Utiliza el getter para formatear el precio con dos decimales
-            const rawValue = this.getDataValue('price');
-            // Asegúrate de que rawValue es un número antes de llamar a toFixed
-            return rawValue !== null ? rawValue.toFixed(2) : null;
-        }
     },
     onSale: {
         type: DataTypes.BOOLEAN
@@ -51,18 +46,21 @@ const Product_SellerCompany = connection.define('product_SellerCompany', {
     timestamps: false
 })
 
-
 // Codigo que me sirve para operar el porcentaje antes de guardar el registro del precio de venta
 
 Product_SellerCompany.beforeSave((product, options) => {
     console.log('Before save hook triggered for product:', product.id);
     if (product.onSale && product.salePercentage > 0) {
+
         const discount = product.price * (product.salePercentage / 100);
-        product.priceAfterSale = product.price - discount;
+        product.priceAfterSale = Math.round((product.price - discount) * 100) / 100
         console.log(`Calculated priceAfterSale: ${product.priceAfterSale} for product: ${product.id}`);
+
     } else {
-        product.priceAfterSale = product.price;
+
+        product.priceAfterSale = Math.round((product.price) * 100) / 100;
         console.log(`Product is not on sale. Set priceAfterSale = price for product: ${product.id}`);
+
     }
 });
 

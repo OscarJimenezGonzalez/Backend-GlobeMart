@@ -5,23 +5,31 @@ const { DataTypes } = require('sequelize')
 const Order = connection.define('order', {
     billNumber: {
         type: DataTypes.DOUBLE,
-        notNull: true
+        allowNull: false
+        // unique: true
+
     },
     shippingAddress: {
         type: DataTypes.STRING,
-        notNull: true
+        allowNull: true
     },
     date: {
-        type: DataTypes.DATE,
-        notNull: true
+        type: DataTypes.STRING,
+        allowNull: true
     },
     paymentMethod: {
-        type: DataTypes.ENUM('PayPal', 'Credit Card', 'Bank Transfer'),
-        defaultValue: "Credit Card"
+        type: DataTypes.ENUM('PayPal', 'Credit Card', 'Bank Transfer', 'Bizum'),
+        defaultValue: "Credit Card",
+    },
+
+    deliveryMethod: {
+
+        type: DataTypes.ENUM('Pick up', 'Normal Delivery', 'Express Delivery'),
+        defaultValue: "Pick up"
     },
     totalPrice: {
         type: DataTypes.DOUBLE,
-        notNull: true
+        allowNull: true
     },
     isPayed: {
         type: DataTypes.BOOLEAN,

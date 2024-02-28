@@ -7,13 +7,12 @@ const {
     deleteProductCategory
 } = require('../controllers/productCategory.controller')
 
-const { checkAdmin } = require('../middlewares/authorization.middleware')
+const { checkAdmin, checkAuth } = require('../middlewares/authorization.middleware')
 
 router
     .get('/', getAllProductCategories)
-    .post('/', checkAdmin, createProductCategory)
-    .put('/:productCategoryId', checkAdmin, updateProductCategory)
-    .delete('/:productCategoryId', checkAdmin, deleteProductCategory)
-
+    .post('/', checkAuth, checkAdmin, createProductCategory)
+    .put('/:productCategoryId', checkAuth, checkAdmin, updateProductCategory)
+    .delete('/:productCategoryId', checkAuth, checkAdmin, deleteProductCategory)
 
 module.exports = router

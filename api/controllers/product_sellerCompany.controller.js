@@ -117,6 +117,42 @@ const updateProductSellerCompany = async (req, res) => {
 
 }
 
+const updateQuantityOfProduct = async (req, res) => {
+
+    try {
+
+        if (req.body.qtyAvailable === undefined) {
+
+            return res.status(400).send("The quantityAv field is missing.");
+
+        }
+
+        const quantityAvailable = {
+
+            qtyAvailable: req.body.qtyAvailable
+
+        }
+
+        const [updatedQty] = await Product_SellerCompany.update(quantityAvailable, {
+            where: {
+                id: req.params.productSellerCompanyId
+            }
+        })
+        if (updatedQty > 0) {
+            return res.status(200).json("Quantity Successfully updated.")
+        }
+        else {
+            return res.status(400).send("ProductSellerCompany couldnt be updated.")
+        }
+
+    } catch (error) {
+
+        return res.status(500).send({ message: error.message })
+
+    }
+
+}
+
 const deleteProductSellerCompany = async (req, res) => {
 
     try {
@@ -140,8 +176,6 @@ const deleteProductSellerCompany = async (req, res) => {
     }
 
 }
-
-// Specific EndPoints 
 
 const getOwnVersionOfProducts = async (req, res) => {
 
@@ -342,6 +376,7 @@ module.exports = {
     getOneVersionOfProduct,
     createProductSellerCompany,
     updateProductSellerCompany,
+    updateQuantityOfProduct,
     deleteProductSellerCompany,
     getOwnVersionOfProducts,
     createVersionOfProduct,
