@@ -4,8 +4,9 @@ const { DataTypes } = require('sequelize')
 
 const Order = connection.define('order', {
     billNumber: {
-        type: DataTypes.DOUBLE,
-        allowNull: false
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        // autoIncrement: true,
         // unique: true
 
     },

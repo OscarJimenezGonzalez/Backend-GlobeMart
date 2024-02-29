@@ -145,6 +145,7 @@ const getOwnOrders = async (req, res) => {   // Customer
     }
 
 }
+
 const getAllOwnSellerOrders = async (req, res) => {     // Seller 
 
     try {

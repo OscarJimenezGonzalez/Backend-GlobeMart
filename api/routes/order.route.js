@@ -11,14 +11,11 @@ const {
 const { checkAdmin, checkAuth } = require('../middlewares/authorization.middleware')
 
 router
-    .get('/', checkAdmin, getAllOrders)
+
+    .get('/', getAllOrders)
     .post('/customer', checkAuth, createOwnOrder)
     .post('/', checkAdmin, createOrder)
     .put('/:orderId', checkAdmin, updateOrder)
     .delete('/:orderId', checkAdmin, deleteOrder)
-
-
-
-
 
 module.exports = router

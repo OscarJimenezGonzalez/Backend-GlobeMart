@@ -20,6 +20,12 @@ const Product_SellerCompany = connection.define('product_SellerCompany', {
     salePercentage: {
         type: DataTypes.INTEGER
     },
+    saleQuantity: {
+        type: DataTypes.DOUBLE
+    },
+    priceAfterSale: {
+        type: DataTypes.DOUBLE
+    },
     qtyAvailable: {
         type: DataTypes.INTEGER
     },
@@ -38,9 +44,7 @@ const Product_SellerCompany = connection.define('product_SellerCompany', {
     isFineanceable: {
         type: DataTypes.BOOLEAN
     },
-    priceAfterSale: {
-        type: DataTypes.DOUBLE
-    }
+
 
 }, {
     timestamps: false
@@ -48,8 +52,20 @@ const Product_SellerCompany = connection.define('product_SellerCompany', {
 
 // Codigo que me sirve para operar el porcentaje antes de guardar el registro del precio de venta
 
-Product_SellerCompany.beforeSave((product, options) => {
-    console.log('Before save hook triggered for product:', product.id);
+
+Product_SellerCompany.beforeSave((product) => {
+
+    // hook para obtener automáticamente la cantidad del descuento
+
+    if (product.onSale && product.salePercentage) {
+
+        // product.saleQuantity = product.price * (product.salePercentage / 100);
+        product.saleQuantity = Math.round((product.price * (product.salePercentage / 100)) * 100) / 100
+
+    }
+
+    // hook para obtener automáticamente la cantidad despues del dicount
+
     if (product.onSale && product.salePercentage > 0) {
 
         const discount = product.price * (product.salePercentage / 100);
@@ -62,6 +78,7 @@ Product_SellerCompany.beforeSave((product, options) => {
         console.log(`Product is not on sale. Set priceAfterSale = price for product: ${product.id}`);
 
     }
+
 });
 
 

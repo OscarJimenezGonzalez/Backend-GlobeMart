@@ -4,13 +4,15 @@ const {
     createCartItem,
     getAllCartItems,
     updateCartItem,
-    deleteCartItem
+    deleteCartItem,
+    asociateCartItemToOrder,
 } = require('../controllers/cartItem.controller')
 
 const { checkAdmin } = require('../middlewares/authorization.middleware')
 
 router
     .get('/', checkAdmin, getAllCartItems)
+    .post('/customer', asociateCartItemToOrder)
     .post('/', createCartItem)
     .put('/:cartItemId', checkAdmin, updateCartItem)
     .delete('/:cartItemId', checkAdmin, deleteCartItem)

@@ -125,16 +125,25 @@ const deleteCartItem = async (req, res) => {
 
 // Specific EndPoints
 
-const createOwnCartItem = async (req, res) => {
+const asociateCartItemToOrder = async (req, res) => {
 
     try {
 
+        // PENDING 
+        const cartItem = await CartItem.create(req.body)
 
+        if (cartItem) {
+            return res.status(200).json(cartItem)
+        }
+        else {
 
+            return res.status(400).send("CartItem couldnt be created.")
+
+        }
 
     } catch (error) {
 
-
+        res.status(500).json({ message: error.message })
 
     }
 
@@ -146,6 +155,7 @@ const createOwnCartItem = async (req, res) => {
 module.exports = {
 
     getAllCartItems,
+    asociateCartItemToOrder,
     createCartItem,
     updateCartItem,
     deleteCartItem,
