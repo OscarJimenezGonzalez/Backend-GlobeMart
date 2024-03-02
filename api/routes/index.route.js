@@ -20,7 +20,7 @@ router
     .use('/productCategory', productCategoryRouter)
     .use('/order', checkAuth, orderRouter)
     .use('/cartItem', checkAuth, cartItemRouter)
-    .use('/sellerCompany', checkAuth, sellerCompanyRouter)
+    .use('/sellerCompany', sellerCompanyRouter)
     .use('/productSellerCompany', product_sellerCompanyRouter)
     // .use('/commercialAdd', commercialAddRouter)
 

@@ -20,6 +20,26 @@ const getAllSellerCompanies = async (req, res) => {
     }
 
 }
+const getOneSellerCompany = async (req, res) => {
+
+    try {
+
+        const sellerCompanies = await SellerCompany.findByPk(req.params.sellerCompanyId)
+
+        if (sellerCompanies) {
+            return res.status(200).json(sellerCompanies)
+        }
+        else {
+            return res.status(400).send("SellerCompany Not Found")
+        }
+
+    } catch (error) {
+
+        res.status(500).json({ message: error.message })
+
+    }
+
+}
 
 const createSellerCompany = async (req, res) => {
 
@@ -229,6 +249,7 @@ const deleteOwnSellerCompany = async (req, res) => {
 module.exports = {
 
     getOwnSellerCompany,
+    getOneSellerCompany,
     getAllSellerCompanies,
     createSellerCompany,
     createOwnSellerCompany,

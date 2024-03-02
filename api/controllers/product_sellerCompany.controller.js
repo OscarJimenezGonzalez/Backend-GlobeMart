@@ -43,7 +43,7 @@ const getOneVersionOfProduct = async (req, res) => {
 
             include: [{
                 model: SellerCompany,
-                attributes: ['name'] // Atributos a seleccionar del modelo SellerCompany
+                attributes: ['id', 'name'] // Atributos a seleccionar del modelo SellerCompany
             },
             {
                 model: Product,

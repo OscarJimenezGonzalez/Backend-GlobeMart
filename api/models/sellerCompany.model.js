@@ -16,6 +16,11 @@ const SellerCompany = connection.define('sellerCompany', {
         unique: true
     },
 
+    description: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+
     location: {
         type: DataTypes.STRING,
 

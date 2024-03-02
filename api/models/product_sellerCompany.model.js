@@ -1,6 +1,5 @@
 const { connection } = require('../../database/index')
 const { DataTypes } = require('sequelize');
-const ProductCategory = require('./productCategory.model');
 
 const Product_SellerCompany = connection.define('product_SellerCompany', {
 

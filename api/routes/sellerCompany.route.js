@@ -3,6 +3,7 @@ const router = require('express').Router()
 const {
     createSellerCompany,
     getAllSellerCompanies,
+    getOneSellerCompany,
     updateSellerCompany,
     deleteSellerCompany,
     //Specific EndPoints
@@ -13,16 +14,17 @@ const {
 
 } = require('../controllers/sellerCompany.controller')
 
-const { checkAdmin } = require('../middlewares/authorization.middleware')
+const { checkAdmin, checkAuth } = require('../middlewares/authorization.middleware')
 
 router
-    .get('/profileCompany', getOwnSellerCompany)
-    .get('/', checkAdmin, getAllSellerCompanies)
-    .post('/profileCompany', createOwnSellerCompany)
-    .post('/', checkAdmin, createSellerCompany)
-    .put('/profileCompany', updateOwnSellerCompany)
-    .put('/:sellerCompanyId', checkAdmin, updateSellerCompany)
-    .delete('/profileCompany', deleteOwnSellerCompany)
-    .delete('/:sellerCompanyId', checkAdmin, deleteSellerCompany)
+    .get('/profileCompany', checkAuth, getOwnSellerCompany)
+    .get('/:sellerCompanyId', getOneSellerCompany)  // No hace falta estar logueado. 
+    .get('/', checkAuth, checkAdmin, getAllSellerCompanies)
+    .post('/profileCompany', checkAuth, createOwnSellerCompany)
+    .post('/', checkAuth, checkAdmin, createSellerCompany)
+    .put('/profileCompany', checkAuth, updateOwnSellerCompany)
+    .put('/:sellerCompanyId', checkAuth, checkAdmin, updateSellerCompany)
+    .delete('/profileCompany', checkAuth, deleteOwnSellerCompany)
+    .delete('/:sellerCompanyId', checkAuth, checkAdmin, deleteSellerCompany)
 
 module.exports = router

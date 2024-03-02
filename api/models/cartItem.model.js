@@ -6,6 +6,16 @@ const CartItem = connection.define('cartItem', {
         type: DataTypes.INTEGER,
         allowNull: true
     },
+    shipped: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: false
+    },
+    settled: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: false
+    }
 }, {
     timestamps: false
 })
