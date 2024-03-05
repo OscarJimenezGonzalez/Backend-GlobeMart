@@ -8,6 +8,7 @@ const orderRouter = require('./order.route')
 const cartItemRouter = require('./cartItem.route')
 const sellerCompanyRouter = require('./sellerCompany.route')
 const product_sellerCompanyRouter = require('./product_sellerCompany.route')
+const productReview = require('./productReview.route')
 // const commercialAddRouter = require('./commercialAdd.route')
 
 const { checkAuth } = require('../middlewares/authorization.middleware')
@@ -22,6 +23,10 @@ router
     .use('/cartItem', checkAuth, cartItemRouter)
     .use('/sellerCompany', sellerCompanyRouter)
     .use('/productSellerCompany', product_sellerCompanyRouter)
-    // .use('/commercialAdd', commercialAddRouter)
+    .use('/productReview', productReview)
+
+    
+
+// .use('/commercialAdd', commercialAddRouter)
 
 module.exports = router 

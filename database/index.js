@@ -1,4 +1,5 @@
 const { Sequelize } = require("sequelize")
+require('dotenv').config()
 
 const connection = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
     host: process.env.DB_HOST,
@@ -6,6 +7,15 @@ const connection = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, p
     logging: false,
     port: process.env.DB_PORT
 })
+
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, { apiVersion: '2023-10-16' })
+
+// connection.get('/config', (req, res) => {
+//     res.send({
+//         publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+//     })
+// })
+
 
 const checkConnection = async () => {
     try {
@@ -34,5 +44,6 @@ const syncModels = async (value) => {
 module.exports = {
     connection,
     checkConnection,
-    syncModels
+    syncModels,
+    stripe
 }

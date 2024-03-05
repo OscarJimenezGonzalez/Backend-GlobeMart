@@ -7,7 +7,6 @@ const Product_SellerCompany = connection.define('product_SellerCompany', {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
-
     },
     price: {
         type: DataTypes.DOUBLE,
@@ -43,7 +42,6 @@ const Product_SellerCompany = connection.define('product_SellerCompany', {
     isFineanceable: {
         type: DataTypes.BOOLEAN
     },
-
 
 }, {
     timestamps: false

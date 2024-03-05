@@ -18,7 +18,7 @@ const { checkAdmin, checkAuth } = require('../middlewares/authorization.middlewa
 
 router
     .get('/profileCompany', checkAuth, getOwnSellerCompany)
-    .get('/:sellerCompanyId', getOneSellerCompany)  // No hace falta estar logueado. 
+    .get('/:sellerCompanyId', getOneSellerCompany)  // No hace falta estar logueado.
     .get('/', checkAuth, checkAdmin, getAllSellerCompanies)
     .post('/profileCompany', checkAuth, createOwnSellerCompany)
     .post('/', checkAuth, checkAdmin, createSellerCompany)

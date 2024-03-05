@@ -43,7 +43,7 @@ const getOneVersionOfProduct = async (req, res) => {
 
             include: [{
                 model: SellerCompany,
-                attributes: ['id', 'name'] // Atributos a seleccionar del modelo SellerCompany
+                attributes: ['id', 'name', 'policy'] // Atributos a seleccionar del modelo SellerCompany
             },
             {
                 model: Product,
@@ -204,11 +204,11 @@ const getOwnVersionOfProducts = async (req, res) => {
 
                     include: [{
                         model: SellerCompany,
-                        attributes: ['name'] // Atributos a seleccionar del modelo SellerCompany
+                        attributes: ['id', 'name'] // Atributos a seleccionar del modelo SellerCompany
                     },
                     {
                         model: Product,
-                        attributes: ['name', 'model', 'brand'] // Atributos a seleccionar del modelo Product
+                        attributes: ['name', 'model', 'brand', 'imageURL', 'productCategoryId'] // Atributos a seleccionar del modelo Product
                     }]
 
                 })
@@ -230,6 +230,51 @@ const getOwnVersionOfProducts = async (req, res) => {
     } catch (error) {
 
         return res.status(500).send({ message: error.message })
+
+    }
+
+}
+
+// Trae una lista de los productos de una compañia
+const getListOfSellerCompanyVersions = async (req, res) => {
+
+    try {
+
+        const sellerCompany = await SellerCompany.findByPk(req.params.sellerCompanyId)
+
+        if (sellerCompany) {
+
+            const productSellerCompany = await Product_SellerCompany.findAll({
+
+                where: {
+                    sellerCompanyId: sellerCompany.id
+                },
+                include: [{
+                    model: SellerCompany,
+                    attributes: ['id', 'name', 'policy'] // Atributos a seleccionar del modelo SellerCompany
+                },
+                {
+                    model: Product,
+                    attributes: ['name', 'model', 'brand', 'imageURL', 'productCategoryId'] // Atributos a seleccionar del modelo Product
+                }]
+
+            })
+
+            if (productSellerCompany.length > 0) {
+                return res.status(200).json(productSellerCompany)
+            }
+            else {
+                return res.status(404).send("ProductSellerCompany was not found.")
+            }
+
+        }
+        else {
+            return res.status(404).send("SellerCompany Not Found")
+        }
+
+    } catch (error) {
+
+        res.status(500).json({ message: error.message })
 
     }
 
@@ -374,6 +419,7 @@ module.exports = {
 
     getAllProductSellerCompanies,
     getOneVersionOfProduct,
+    getListOfSellerCompanyVersions,
     createProductSellerCompany,
     updateProductSellerCompany,
     updateQuantityOfProduct,
