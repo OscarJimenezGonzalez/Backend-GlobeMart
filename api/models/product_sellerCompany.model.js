@@ -9,7 +9,7 @@ const Product_SellerCompany = connection.define('product_SellerCompany', {
         autoIncrement: true
     },
     price: {
-        type: DataTypes.DOUBLE,
+        type: DataTypes.DECIMAL(10, 2),
         notNull: true,
     },
     onSale: {
@@ -22,7 +22,7 @@ const Product_SellerCompany = connection.define('product_SellerCompany', {
         type: DataTypes.DOUBLE
     },
     priceAfterSale: {
-        type: DataTypes.DOUBLE
+        type: DataTypes.DECIMAL(10, 2),
     },
     qtyAvailable: {
         type: DataTypes.INTEGER
@@ -53,6 +53,12 @@ const Product_SellerCompany = connection.define('product_SellerCompany', {
 Product_SellerCompany.beforeSave((product) => {
 
     // hook para obtener automáticamente la cantidad del descuento
+
+    if (product.price) {
+
+        product.price = parseFloat((product.price.toFixed(2)))
+
+    }
 
     if (product.onSale && product.salePercentage) {
 
