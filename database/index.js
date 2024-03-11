@@ -8,14 +8,13 @@ const connection = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, p
     port: process.env.DB_PORT
 })
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, { apiVersion: '2023-10-16' })
+// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, { apiVersion: '2023-10-16' })
 
 // connection.get('/config', (req, res) => {
 //     res.send({
 //         publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
 //     })
 // })
-
 
 const checkConnection = async () => {
     try {
@@ -45,5 +44,5 @@ module.exports = {
     connection,
     checkConnection,
     syncModels,
-    stripe
+    
 }

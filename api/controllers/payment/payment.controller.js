@@ -1,29 +1,24 @@
-import { stripe } from "../../../database"
+require("dotenv").config()
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, { apiVersion: '2023-10-16' })
 
 const createPayment = async (req, res) => {
 
-    const { amount } = req.body
-
     try {
-
+        const { amount } = req.body;
         const paymentIntent = await stripe.paymentIntents.create({
-
-            amount: amount,
+            amount,
             currency: 'eur',
-
+            // Puedes agregar más configuraciones de pago si es necesario
         });
-
         res.send({
-            clientSecret: paymentIntent.client_secret
-        })
-
+            clientSecret: paymentIntent.client_secret,
+        });
     } catch (error) {
-
-        res.status(400).send({ error: error.message })
-
+        res.status(500).send({ error: error.message });
     }
 
 }
+
 const getPayment = async (req, res) => {
 
 

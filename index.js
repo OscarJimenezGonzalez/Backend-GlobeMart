@@ -2,8 +2,11 @@ require("dotenv").config()
 const express = require("express")
 const morgan = require("morgan")
 const cors = require("cors")
-
 const addRelationsToModels = require("./database/relations")
+
+const Stripe = require('stripe')
+// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, { apiVersion: '2023-10-16' })
+
 
 const {
     checkConnection,
@@ -35,4 +38,5 @@ function startExpress() {
 ; (async function startAPI() {
     await checkDB()
     startExpress()
-})()  
+})()
+

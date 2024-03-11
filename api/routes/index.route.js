@@ -9,6 +9,7 @@ const cartItemRouter = require('./cartItem.route')
 const sellerCompanyRouter = require('./sellerCompany.route')
 const product_sellerCompanyRouter = require('./product_sellerCompany.route')
 const productReview = require('./productReview.route')
+const paymentRouter = require('./payment/payment.route')
 // const commercialAddRouter = require('./commercialAdd.route')
 
 const { checkAuth } = require('../middlewares/authorization.middleware')
@@ -25,7 +26,7 @@ router
     .use('/productSellerCompany', product_sellerCompanyRouter)
     .use('/productReview', productReview)
 
-    
+    .use('/payment', paymentRouter)
 
 // .use('/commercialAdd', commercialAddRouter)
 

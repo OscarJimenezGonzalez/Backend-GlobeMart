@@ -24,6 +24,26 @@ const getAllOrders = async (req, res) => {
 
 }
 
+const getOneOrder = async (req, res) => {
+
+    try {
+
+        const order = await Order.findByPk(req.params.orderId)
+        if (order) {
+            return res.status(200).json(order)
+        }
+        else {
+            return res.status(400).send("Order couldnt be found.")
+        }
+
+    } catch (error) {
+
+        return res.status(500).send({ message: error.message })
+
+    }
+
+}
+
 const createOrder = async (req, res) => {
 
     try {
@@ -128,19 +148,35 @@ const createOwnOrder = async (req, res) => {   // Customer
     }
 
 }
+
 const getOwnOrders = async (req, res) => {   // Customer 
 
     try {
 
-        if (orders) {
+        const currentUserId = res.locals.user.id
+        console.log(currentUserId)
+        const ownOrders = await Order.findAll({
+            where: {
+
+                userId: currentUserId
+
+            }
+        })
+
+        if (ownOrders.length > 0) {
+
+            return res.status(200).json(ownOrders)
 
         }
         else {
+
+            return res.status(400).send("Own Orders couldnt be found.")
 
         }
 
     } catch (error) {
 
+        res.status(500).json({ message: error.message })
 
     }
 
@@ -162,6 +198,8 @@ const getAllOwnSellerOrders = async (req, res) => {     // Seller
 module.exports = {
 
     getAllOrders,
+    getOneOrder,
+    getOwnOrders,
     createOrder,
     updateOrder,
     deleteOrder,

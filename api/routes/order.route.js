@@ -4,6 +4,8 @@ const {
     createOrder,
     createOwnOrder,
     getAllOrders,
+    getOneOrder,
+    getOwnOrders,
     updateOrder,
     deleteOrder,
 } = require('../controllers/order.controller')
@@ -12,6 +14,8 @@ const { checkAdmin, checkAuth } = require('../middlewares/authorization.middlewa
 
 router
 
+    .get('/customer', checkAuth, getOwnOrders)
+    .get('/:orderId', getOneOrder)
     .get('/', getAllOrders)
     .post('/customer', checkAuth, createOwnOrder)
     .post('/', checkAdmin, createOrder)

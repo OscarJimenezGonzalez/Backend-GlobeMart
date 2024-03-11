@@ -5,4 +5,8 @@ const {
     getPayment
 } = require('../../controllers/payment/payment.controller')
 
-router.post('/', createPayment)
+router
+
+.post('/create-payment-intent', createPayment)
+
+module.exports = router
