@@ -8,7 +8,6 @@ const Order = connection.define('order', {
         allowNull: false,
         // autoIncrement: true,
         // unique: true
-
     },
     shippingAddress: {
         type: DataTypes.STRING,
@@ -24,7 +23,6 @@ const Order = connection.define('order', {
     },
 
     deliveryMethod: {
-
         type: DataTypes.ENUM('Pick up', 'Normal Delivery', 'Express Delivery'),
         defaultValue: "Pick up"
     },
@@ -35,7 +33,11 @@ const Order = connection.define('order', {
     isPayed: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
-    }
+    },
+    orderStatus: {
+        type: DataTypes.ENUM('Awaiting Shipment', 'Shipped', 'On Delivery', 'Completed'),
+        defaultValue: 'Awaiting Shipment'
+    },
 })
 
 module.exports = Order

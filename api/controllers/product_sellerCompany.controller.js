@@ -11,11 +11,11 @@ const getAllProductSellerCompanies = async (req, res) => {
             where: req.query,
             include: [{
                 model: SellerCompany,
-                attributes: ['name'] // Atributos a seleccionar del modelo SellerCompany
+                attributes: ['name'] 
             },
             {
                 model: Product,
-                attributes: ['name', 'model', 'brand', 'imageURL', 'productCategoryId'] // Atributos a seleccionar del modelo Product
+                attributes: ['name', 'model', 'brand', 'imageURL', 'productCategoryId'] 
             }]
 
         })
@@ -43,11 +43,11 @@ const getOneVersionOfProduct = async (req, res) => {
 
             include: [{
                 model: SellerCompany,
-                attributes: ['id', 'name', 'policy'] // Atributos a seleccionar del modelo SellerCompany
+                attributes: ['id', 'name', 'policy'] 
             },
             {
                 model: Product,
-                attributes: ['name', 'model', 'brand', 'imageURL', 'productCategoryId'] // Atributos a seleccionar del modelo Product
+                attributes: ['name', 'model', 'brand', 'imageURL', 'productCategoryId'] 
             }]
 
 
@@ -204,11 +204,11 @@ const getOwnVersionOfProducts = async (req, res) => {
 
                     include: [{
                         model: SellerCompany,
-                        attributes: ['id', 'name'] // Atributos a seleccionar del modelo SellerCompany
+                        attributes: ['id', 'name'] 
                     },
                     {
                         model: Product,
-                        attributes: ['name', 'model', 'brand', 'imageURL', 'productCategoryId'] // Atributos a seleccionar del modelo Product
+                        attributes: ['name', 'model', 'brand', 'imageURL', 'productCategoryId'] 
                     }]
 
                 })
@@ -251,11 +251,11 @@ const getListOfSellerCompanyVersions = async (req, res) => {
                 },
                 include: [{
                     model: SellerCompany,
-                    attributes: ['id', 'name', 'policy'] // Atributos a seleccionar del modelo SellerCompany
+                    attributes: ['id', 'name', 'policy'] 
                 },
                 {
                     model: Product,
-                    attributes: ['name', 'model', 'brand', 'imageURL', 'productCategoryId'] // Atributos a seleccionar del modelo Product
+                    attributes: ['name', 'model', 'brand', 'imageURL', 'productCategoryId'] 
                 }]
 
             })

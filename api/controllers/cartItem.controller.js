@@ -3,7 +3,7 @@ const User = require('../models/user.model.js')
 const Order = require('../models/order.model.js')
 const Product = require('../models/product.model.js')
 const Product_SellerCompany = require('../models/product_sellerCompany.model.js')
-
+const SellerCompany = require('../models/sellerCompany.model.js')
 
 const getAllCartItems = async (req, res) => {
 
@@ -18,7 +18,7 @@ const getAllCartItems = async (req, res) => {
                 include:
                     [{
                         model: Product,
-                        attributes: ['name', 'model', 'brand', 'imgURL']
+                        attributes: ['name', 'model', 'brand', 'imageURL']
                     }]
             },
             {
@@ -72,7 +72,6 @@ const createCartItem = async (req, res) => {
     }
 
 }
-
 
 const updateCartItem = async (req, res) => {
 
@@ -147,17 +146,111 @@ const asociateCartItemToOrder = async (req, res) => {
 
     }
 
-
 }
 
+const updateCartItemListStatus = async (req, res) => {
 
+    try {
+
+        const order = await Order.findByPk(req.params.orderId)
+
+        if (order) {
+
+            const orderId = order.id
+            console.log(orderId)
+
+            const cartItems = await CartItem.findAll({
+                where: {
+                    orderId: orderId
+                }
+            })
+
+            if (cartItems) {
+
+                for (let i = 0; i < cartItems.length; i++) {
+
+
+                    const [updatedCartItems] = await CartItem.update(req.body, {
+                        where: {
+                            id: cartItems[i].id
+                        }
+                    })
+
+                }
+
+                return res.status(200).json("CartItems were updated successfully.")
+
+            }
+
+        }
+
+    } catch (error) {
+
+        console.log("Coño")
+        res.status(500).json({ message: error.message })
+
+    }
+}
+const getCartItemsFromOrder = async (req, res) => {
+
+    try {
+
+        const order = await Order.findByPk(req.params.orderId)
+
+        if (!order) {
+            return res.status(404).send("Order couldn't be found.");
+        }
+
+        const orderId = order.id
+        const cartItems = await CartItem.findAll({
+
+            where: {
+                orderId: orderId
+            }, include: [{
+
+                model: Product_SellerCompany,
+                attributes: ['price'],
+                include:
+                    [{
+                        model: Product,
+                        attributes: ['name', 'model', 'brand', 'imageURL']
+                    },
+
+                    {
+                        model: SellerCompany,
+                        attributes: ['name', 'id']
+                    }
+                    ]
+
+            }]
+
+        })
+
+        // if (cartItems.length === 0) {
+
+        //     return res.status(404).send("CartItems couldnt be found.")
+
+        // }
+
+        return res.status(200).json(cartItems)
+
+    } catch (error) {
+
+        res.status(500).json({ message: error.message })
+
+    }
+
+}
 
 module.exports = {
 
     getAllCartItems,
+    getCartItemsFromOrder,
     asociateCartItemToOrder,
     createCartItem,
     updateCartItem,
+    updateCartItemListStatus,
     deleteCartItem,
 
 }
+

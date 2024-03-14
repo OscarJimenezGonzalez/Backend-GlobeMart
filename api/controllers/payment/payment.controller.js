@@ -4,10 +4,13 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, { apiVersion: '2
 const createPayment = async (req, res) => {
 
     try {
-        const { amount } = req.body;
+
+        let { amount } = req.body;
+        amount = Math.round(amount * 100)
         const paymentIntent = await stripe.paymentIntents.create({
             amount,
             currency: 'eur',
+            // payment_method,
             // Puedes agregar más configuraciones de pago si es necesario
         });
         res.send({

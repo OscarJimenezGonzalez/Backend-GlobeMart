@@ -19,7 +19,7 @@ router
     .get('/', getAllOrders)
     .post('/customer', checkAuth, createOwnOrder)
     .post('/', checkAdmin, createOrder)
-    .put('/:orderId', checkAdmin, updateOrder)
+    .put('/:orderId', updateOrder)
     .delete('/:orderId', checkAdmin, deleteOrder)
 
 module.exports = router

@@ -1,3 +1,4 @@
+const { where } = require('sequelize');
 const ProductReview = require('../models/productReview.model');
 const Product_SellerCompany = require('../models/product_sellerCompany.model')
 const User = require('../models/user.model');
@@ -29,6 +30,37 @@ const createProductReview = async (req, res) => {
     try {
 
         const productReview = await ProductReview.create(req.body)
+
+        if (productReview) {
+
+            return res.status(200).json(productReview)
+
+        }
+        else {
+
+            return res.status(400).send("productReview couldnt be created.")
+
+        }
+
+    } catch (error) {
+
+        res.status(500).json({ message: error.message })
+
+    }
+
+}
+
+const createOwnProductReview = async (req, res) => {
+
+    try {
+
+        const currentUserId = res.locals.user.id
+        const productReview = await ProductReview.create({
+
+            ...req.body,
+            userId: currentUserId
+
+        })
 
         if (productReview) {
 
@@ -137,6 +169,7 @@ module.exports = {
     getAllProductReviews,
     getProductReviewVersion,
     createProductReview,
+    createOwnProductReview,
     updateProductReview,
     deleteProductReview,
 
