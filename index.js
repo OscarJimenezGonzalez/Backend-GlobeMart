@@ -20,6 +20,7 @@ async function checkDB() {
     // await syncModels("force")
     // await syncModels("alter")
 
+
 }
 
 function startExpress() {

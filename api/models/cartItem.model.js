@@ -6,16 +6,15 @@ const CartItem = connection.define('cartItem', {
         type: DataTypes.INTEGER,
         allowNull: true
     },
-    shipped: {
-        type: DataTypes.BOOLEAN,
-        allowNull: true,
-        defaultValue: false
-    },
     settled: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
         defaultValue: false
-    }
+    },
+    cartItemStatus: {
+        type: DataTypes.ENUM('Pending Payment', 'Awaiting Shipment', 'Shipped', 'On Delivery', 'Delivered'),
+        defaultValue: 'Pending Payment'
+    },
 }, {
     timestamps: false
 })

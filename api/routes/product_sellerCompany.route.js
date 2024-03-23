@@ -18,7 +18,7 @@ const {
 const { checkAdmin, checkAuth } = require('../middlewares/authorization.middleware')
 
 router
-    .get('/customer/:sellerCompanyId', getListOfSellerCompanyVersions) 
+    .get('/customer/:sellerCompanyId', getListOfSellerCompanyVersions)
     .get('/profileSeller', checkAuth, getOwnVersionOfProducts)  // Para que cada vendedor vea sus versiones de productos
     .get('/:productSellerCompanyId', getOneVersionOfProduct) // All
     .get('/', getAllProductSellerCompanies)  // *****Selected**** Ver todos los productos con sus datos de vendedor incluidos

@@ -337,8 +337,7 @@ const updateVersionOfProduct = async (req, res) => {
         });
 
         if (currentSellerCompany) {
-            // Encontrar la entrada de Product_SellerCompany a actualizar
-            // Es decir si el registro que buscamos, está en la lista de esta empresa, nos dejará.
+           
             const productSellerCompanyToUpdate = await Product_SellerCompany.findByPk(req.params.productSellerCompanyId);
 
             if (!productSellerCompanyToUpdate) {

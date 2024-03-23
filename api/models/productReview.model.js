@@ -2,6 +2,7 @@ const { connection } = require('../../database/index')
 const { DataTypes } = require('sequelize')
 
 const ProductReview = connection.define('productReview', {
+    
     rating: {
         type: DataTypes.DOUBLE,
         allowNull: true

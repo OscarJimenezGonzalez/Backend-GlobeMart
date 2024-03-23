@@ -191,6 +191,7 @@ const updateCartItemListStatus = async (req, res) => {
 
     }
 }
+
 const getCartItemsFromOrder = async (req, res) => {
 
     try {
@@ -242,10 +243,60 @@ const getCartItemsFromOrder = async (req, res) => {
 
 }
 
+const getCartItemsFromSellerCompany = async (req, res) => {
+
+    try {
+
+        const cartItems = await CartItem.findAll()
+        if (cartItems.length === 0) {
+            return res.status(404).send("CartItems Not Found")
+        }
+
+        const productsFromSeller = await Product_SellerCompany.findAll({
+            where: {
+                sellerCompanyId: req.params.sellerCompanyId
+            }
+        },)
+
+        if (productsFromSeller.length === 0) {
+            return res.status(404).json("Products Not Found")
+        }
+
+        const productFromSellerIds = productsFromSeller.map(object => object.id)
+        console.log(productFromSellerIds)
+
+        const filteredCartItemList = cartItems.filter((cartItem) => productFromSellerIds.includes(cartItem.productSellerCompanyId))
+
+        if (filteredCartItemList === 0) {
+
+            return res.status(404).send("CartItems Not Found")
+
+        }
+
+        return res.status(200).json(filteredCartItemList)
+
+    } catch (error) {
+
+        res.status(500).json({ message: error.message })
+
+    }
+
+}
+
+const getCartItemVerifiedStatus = async (req, res) => {
+
+
+
+
+}
+
+
 module.exports = {
 
     getAllCartItems,
     getCartItemsFromOrder,
+    getCartItemsFromSellerCompany,
+    getCartItemVerifiedStatus,
     asociateCartItemToOrder,
     createCartItem,
     updateCartItem,
