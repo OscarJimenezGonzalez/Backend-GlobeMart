@@ -5,6 +5,7 @@ const {
     getAllCartItems,
     getCartItemsFromOrder,
     getCartItemsFromSellerCompany,
+    // getTotalSalesFromSeller,
     updateCartItem,
     updateCartItemListStatus,
     deleteCartItem,
@@ -15,12 +16,14 @@ const { checkAdmin, checkAuth } = require('../middlewares/authorization.middlewa
 
 router
 
+
+    // .get('/sales/:sellerCompanyId', checkAuth, getTotalSalesFromSeller)
     .get('/seller/:sellerCompanyId', checkAuth, getCartItemsFromSellerCompany)
     .get('/customer/:orderId', checkAuth, getCartItemsFromOrder)
     .get('/', checkAdmin, getAllCartItems)
     .post('/customer', asociateCartItemToOrder)
     .post('/', createCartItem)
-    .put('/:cartItemId', checkAdmin, updateCartItem)
+    .put('/:cartItemId', updateCartItem)
     .put('/updateStatus/:orderId', updateCartItemListStatus)
     .delete('/:cartItemId', checkAdmin, deleteCartItem)
 

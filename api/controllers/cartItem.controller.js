@@ -205,33 +205,28 @@ const getCartItemsFromOrder = async (req, res) => {
         const orderId = order.id
         const cartItems = await CartItem.findAll({
 
-            where: {
-                orderId: orderId
-            }, include: [{
+            where: { orderId: orderId },
+            include:
 
-                model: Product_SellerCompany,
-                attributes: ['price'],
-                include:
-                    [{
-                        model: Product,
-                        attributes: ['name', 'model', 'brand', 'imageURL']
-                    },
-
+                [
                     {
-                        model: SellerCompany,
-                        attributes: ['name', 'id']
-                    }
-                    ]
+                        model: Product_SellerCompany,
+                        attributes: ['price'],
+                        include:
+                            [{
+                                model: Product,
+                                attributes: ['name', 'model', 'brand', 'imageURL']
+                            },
+                            {
+                                model: SellerCompany,
+                                attributes: ['name', 'id']
+                            }]
 
-            }]
+                    }
+
+                ]
 
         })
-
-        // if (cartItems.length === 0) {
-
-        //     return res.status(404).send("CartItems couldnt be found.")
-
-        // }
 
         return res.status(200).json(cartItems)
 
@@ -244,6 +239,69 @@ const getCartItemsFromOrder = async (req, res) => {
 }
 
 const getCartItemsFromSellerCompany = async (req, res) => {
+
+    try {
+
+        const cartItems = await CartItem.findAll({
+
+            include: [
+                {
+                    model: Order,
+                    attributes: ['shippingAddress'],
+                },
+
+                {
+                    model: Product_SellerCompany,
+                    attributes: ['priceAfterSale'],
+                    include:
+                        [
+                            {
+                                model: Product,
+                                attributes: ['name', 'model', 'brand', 'imageURL']
+                            }
+                        ]
+                }]
+
+        })
+        if (cartItems.length === 0) {
+            return res.status(404).send("CartItems Not Found")
+        }
+
+        const productsFromSeller = await Product_SellerCompany.findAll({
+            where: {
+                sellerCompanyId: req.params.sellerCompanyId
+            }
+        },)
+
+        if (productsFromSeller.length === 0) {
+            return res.status(404).json("Products Not Found")
+        }
+
+        const productFromSellerIds = productsFromSeller.map(object => object.id)
+        const filteredCartItemList = cartItems.filter((cartItem) => productFromSellerIds.includes(cartItem.productSellerCompanyId))
+
+
+
+        if (filteredCartItemList === 0) {
+
+            return res.status(404).send("CartItems Not Found")
+
+        }
+
+        return res.status(200).json(filteredCartItemList)
+
+    } catch (error) {
+
+        res.status(500).json({ message: error.message })
+
+    }
+
+}
+
+
+// 
+
+const getTotalSalesFromSeller = async (req, res) => {
 
     try {
 
@@ -273,7 +331,11 @@ const getCartItemsFromSellerCompany = async (req, res) => {
 
         }
 
-        return res.status(200).json(filteredCartItemList)
+
+        // const totalSales = filteredCartItemList.reduce((cartItem) => cartItem. )
+
+
+        // return res.status(200).json(totalSales)
 
     } catch (error) {
 
@@ -281,22 +343,23 @@ const getCartItemsFromSellerCompany = async (req, res) => {
 
     }
 
-}
-
-const getCartItemVerifiedStatus = async (req, res) => {
-
-
 
 
 }
 
+// const getCartItemVerifiedStatus = async (req, res) => {
+
+
+
+// }
 
 module.exports = {
 
     getAllCartItems,
     getCartItemsFromOrder,
     getCartItemsFromSellerCompany,
-    getCartItemVerifiedStatus,
+    // getTotalSalesFromSeller,
+    // getCartItemVerifiedStatus,
     asociateCartItemToOrder,
     createCartItem,
     updateCartItem,
