@@ -35,7 +35,7 @@ const Order = connection.define('order', {
         defaultValue: false
     },
     orderStatus: {
-        type: DataTypes.ENUM('Pending Payment', 'Accepted', 'In progress', 'Completed'),
+        type: DataTypes.ENUM('Pending Payment', 'Accepted', 'In Progress', 'Completed'),
         defaultValue: 'Pending Payment'
     },
 })

@@ -247,7 +247,15 @@ const getCartItemsFromSellerCompany = async (req, res) => {
             include: [
                 {
                     model: Order,
-                    attributes: ['shippingAddress'],
+                    attributes: ['shippingAddress', 'createdAt'],
+                    include: [
+                        {
+
+                            model: User,
+                            attributes: ['username', 'email']
+
+                        }
+                    ]
                 },
 
                 {
