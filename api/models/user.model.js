@@ -21,6 +21,10 @@ const User = connection.define('user', {
     role: {
         type: DataTypes.ENUM('admin', 'seller', 'customer'),
         defaultValue: "customer"
+    },
+    image: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 })
 
