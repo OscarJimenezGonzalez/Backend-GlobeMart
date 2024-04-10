@@ -7,7 +7,6 @@ const addRelationsToModels = require("./database/relations")
 const Stripe = require('stripe')
 // const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, { apiVersion: '2023-10-16' })
 
-
 const {
     checkConnection,
     syncModels
@@ -19,7 +18,6 @@ async function checkDB() {
     await syncModels()
     // await syncModels("force")
     // await syncModels("alter")
-
 
 }
 
@@ -34,7 +32,6 @@ function startExpress() {
             console.log(`Listening on port ${process.env.PORT}`)
         })
 }
-
 
 ; (async function startAPI() {
     await checkDB()

@@ -42,7 +42,22 @@ const Product_SellerCompany = connection.define('product_SellerCompany', {
     isFineanceable: {
         type: DataTypes.BOOLEAN
     },
-
+    rating: {
+        type: DataTypes.DECIMAL,
+        validate: {
+            min: {
+                args: [0],
+                msg: "El valor de rating debe ser igual o mayor a 0."
+            },
+            max: {
+                args: [5],
+                msg: "El valor de rating debe ser igual o menor a 5."
+            }
+        }
+    },
+    numberOfRates: {
+        type: DataTypes.INTEGER
+    }
 }, {
     timestamps: false
 })

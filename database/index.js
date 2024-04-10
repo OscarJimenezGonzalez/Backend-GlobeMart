@@ -42,7 +42,8 @@ const syncModels = async (value) => {
 
 module.exports = {
     connection,
+    Sequelize,
     checkConnection,
     syncModels,
-    
+
 }
